@@ -76,21 +76,6 @@ exp.array$gene <- factor(exp.array$gene, levels = rev(genes))
 ggplot(data=exp.array)+geom_tile(aes(x=variable,y=gene, fill=value),color='white',size=1)+scale_fill_gradient2(low=low, high=high, mid=mid)+theme(axis.text.x = element_text(angle=90))+guides(fill='none')
 ggsave('DevMarker.tiff', width=8, height=8,dpi=300) # fig. S5A
 
-# Morphogen 
-exp.mat <- org[morphogen,]
-exp.mat <- exp.mat[,sampleorder]
-exp.mat <- t(scale(t(exp.mat)))
-exp.df <- as.data.frame(exp.mat)
-
-exp.df$gene <- rownames(exp.df)
-
-exp.array <- melt(exp.df)
-exp.array$variable<-factor(exp.array$variable, levels=sampleorder)
-exp.array$gene <- factor(exp.array$gene, levels = rev(morphogen))
-
-ggplot(data=exp.array)+geom_tile(aes(x=variable,y=gene, fill=value),color='white',size=1)+scale_fill_gradient2(low=low, high=high, mid=mid)+theme(axis.text.x = element_text(angle=90))+guides(fill='none')
-ggsave('Morphogen.tiff', width=8, height=8,dpi=300) # fig. S5B
-
 # HOX 
 exp.mat <- org[hox,]
 exp.mat <- exp.mat[,sampleorder]
@@ -105,7 +90,22 @@ exp.array$gene <- factor(exp.array$gene, levels = rev(hox))
 
 
 ggplot(data=exp.array)+geom_tile(aes(x=variable,y=gene, fill=value),color='white',size=1)+scale_fill_gradient2(low=low, high=high, mid=mid)+theme(axis.text.x = element_text(angle=90))+guides(fill='none')
-ggsave('BodyAxis.tiff', width=8, height=8,dpi=300) # fig. S5C
+ggsave('BodyAxis.tiff', width=8, height=8,dpi=300) # fig. S5B
+
+# Morphogen 
+exp.mat <- org[morphogen,]
+exp.mat <- exp.mat[,sampleorder]
+exp.mat <- t(scale(t(exp.mat)))
+exp.df <- as.data.frame(exp.mat)
+
+exp.df$gene <- rownames(exp.df)
+
+exp.array <- melt(exp.df)
+exp.array$variable<-factor(exp.array$variable, levels=sampleorder)
+exp.array$gene <- factor(exp.array$gene, levels = rev(morphogen))
+
+ggplot(data=exp.array)+geom_tile(aes(x=variable,y=gene, fill=value),color='white',size=1)+scale_fill_gradient2(low=low, high=high, mid=mid)+theme(axis.text.x = element_text(angle=90))+guides(fill='none')
+ggsave('Morphogen.tiff', width=8, height=8,dpi=300) # fig. S5C
 
 # ECM 
 exp.mat <- org[ecm,]
